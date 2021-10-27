@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="grandparent">
+        <div class="parent parent1">Parent1</div>
+        <div class="parent parent2">
+            Text
+            <!-- Comment -->
+            <span class="child"></span>
+        </div>
+    </div>
+    <script>
+
+        //1. children vs childNodes
+        const parent1 = document.querySelector('.parent1');
+        console.log(parent1.childNodes); //[NodeList] of length 1 as nodes means all text, comments p, span, div etc
+        console.log(parent1.children); // [HTMLCollection] of length 0 as element means only p, span, div, .. not text, comment
+
+        //2.  getElementsByClassName vs querySelectorAll
+
+        const elementsByClassNameParents = document.getElementsByClassName('parent');
+        const querySelectorParent = document.querySelectorAll(".parent");
+
+        console.log('Before elementsByClassNameParents', elementsByClassNameParents);
+        console.log('Before querySelectorParent', querySelectorParent);
+
+        var grandparent = document.querySelector(".grandparent");
+        var child = document.createElement("div");
+        child.classList.add("parent")
+        grandparent.appendChild(child);
+
+        console.log('After elementsByClassNameParents', elementsByClassNameParents); //dynamic live update means [HTMLCollection] of 3
+        console.log('After querySelectorParent', querySelectorParent); //No dynamic update - Kyle recommends this always means [NodeList] of 2 only
+
+    </script>
+</body>
+
+</html>
